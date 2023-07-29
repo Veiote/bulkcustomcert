@@ -59,17 +59,19 @@ function local_bulkcustomcert_extend_settings_navigation($settingsnav, $context)
             ]);
             // Find the course settings node using the 'courseadmin' key.
             $coursesettingsnode = $settingsnav->find('courseadmin', null);
-            $node = $coursesettingsnode->create(
-                $urltext,
-                $url,
-                navigation_node::NODETYPE_LEAF,
-                null,
-                'bulkcustomcert',
-                new pix_icon('a/download_all', 'certificates')
-            );
+            if ($coursesettingsnode) {
+                $node = $coursesettingsnode->create(
+                    $urltext,
+                    $url,
+                    navigation_node::NODETYPE_LEAF,
+                    null,
+                    'bulkcustomcert',
+                    new pix_icon('a/download_all', 'certificates')
+                );
 
-            // Add the new node _before_ the 'gradebooksetup' node.
-            $coursesettingsnode->add_node($node, 'gradebooksetup');
+                // Add the new node _before_ the 'gradebooksetup' node.
+                $coursesettingsnode->add_node($node, 'gradebooksetup');
+            }
         }
     }
 }
